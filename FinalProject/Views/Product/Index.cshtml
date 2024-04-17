@@ -1,0 +1,51 @@
+﻿@model List<Product>
+
+@{
+	ViewData["Title"]="Index";
+}
+
+<h2>PRODUCTS</h2>
+
+@if (TempData["status"] != null)
+{
+	<div class="alert alert-success" role="alert">
+		@TempData["status"]
+	</div>
+
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Stock</th>
+			<th>Remove</th>
+			<th>Update</th>
+		</tr>
+	</thead>
+	<tbody>
+	@foreach(var item in Model)
+	{
+		<tr>
+			<td>@item.Id</td>
+			<td>@item.Name</td>
+			<td>@item.Price</td>
+			<td>@item.Stock</td>
+			<td>
+				<a asp-controller="Product" asp-action="Remove" asp-route-id="@item.Id">
+					<button class="btn-danger btn-sm">Remove</button>
+				</a>
+			</td>
+			<td>
+				<a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id">
+					<button class="btn-primary btn-sm">Update</button>
+				</a>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
+<a asp-controller="Product" asp-action="Add">
+	<button class="btn-sm btn-success">Add a new product</button></a>
